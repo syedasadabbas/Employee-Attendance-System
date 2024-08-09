@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Mark Absence{% endblock %}
+
+{% block content %}
+    <h2>Mark Absence</h2>
+    <form method="post" action="{% url 'mark_absent' uid=uid %}">
+        {% csrf_token %}
+        <button type="submit">Mark Absent</button>
+    </form>
+    {% if status %}
+        <p>{{ status }}</p>
+    {% endif %}
+{% endblock %}
