@@ -14,8 +14,10 @@ class AttendanceSerializer(serializers.ModelSerializer):
 class DailyProgressSerializer(serializers.ModelSerializer):
     class Meta:
         model = DailyProgress
-        fields = '__all__'
+        fields = ['date', 'hours_worked']
 
-class MonthlyReportSerializer(serializers.Serializer):
-    employee = serializers.PrimaryKeyRelatedField(queryset=Employee.objects.all())
-    total_hours = serializers.DecimalField(max_digits=5, decimal_places=2)
+class EmployeeMonthlyReportSerializer(serializers.Serializer):
+    employee_id = serializers.IntegerField()
+    employee_username = serializers.CharField()
+    daily_progress = DailyProgressSerializer(many=True)
+

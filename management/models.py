@@ -16,5 +16,8 @@ class Attendance(models.Model):
 class DailyProgress(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     date = models.DateField()
-    hours_worked = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    hours_worked = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
 
+    def save(self, *args, **kwargs):
+        self.hours_worked = round(self.hours_worked)
+        super().save(*args, **kwargs)
